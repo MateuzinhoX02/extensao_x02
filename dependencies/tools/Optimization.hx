@@ -1,3 +1,4 @@
+
 package tools;
 
 #if android
@@ -27,34 +28,17 @@ import sys.io.File;
 import flixel.util.FlxColor;
 using StringTools;
 
-class SystemUtil {
+class Optimization {
 	
-    /**
-     * @author: MateuzinhoX02
-     * Inspired in Sirox and M.A Jigsaw.
-     * And some code stoled of Sirox
-     */
     public static var path = lime.system.System.applicationStorageDirectory;
-    //I lost my sanity
-    var haveLua = false;
-    var haveVlc = false;
-    var haveLua2 = false;
-    var haveVlc2 = false;
-	
+
     override function create() {
 
-    //This code really sucks lol
+    //If your phone sucks
 
-    public static function PathDir() {
-        #if debug
-        FlxG.log.add('Path dir is = ' + path); //idk
-        #end
-    }
-
-    public static function checkLibs() { //checking the game apk integrity
-        //CHECK ARM64-V8A
-        if (FileSystem.exists(path + 'lib/arm64-v8a/libluajit.so')) {
-        haveLua = true;
+    public static function checkSprites(charName:String) { //checking the game sprites
+        if (FileSystem.exists(path + 'assets/characters/'+charName+'.json')) {
+        psych = true;
         #if debug
         FlxG.log.add('The APK have the lua lib in arm64-v8a');
         #end
@@ -64,44 +48,8 @@ class SystemUtil {
         FlxG.log.add('The APK dont have the lua lib in arm64-v8a, this mod have modcharts?');
         #end
         }
-
-        if (FileSystem.exists(path + 'lib/arm64-v8a/libvlc.so')) {
-        haveVlc = true;
-        #if debug 
-        FlxG.log.add('The APK have the VLC lib in arm64-v8a')
-        #end
-        } else {
-        haveVlc = false;
-        #if debug
-        FlxG.log.add('The APK dont have the vlc lib in arm64-v8a');
-        #end
-        }
-
-        //CHECK ARMEABI-V7A
-        if (FileSystem.exists(path + 'lib/armeabi-v7a/libluajit.so')) {
-        haveLua2 = true;
-        #if debug
-        FlxG.log.add('The APK have the lua lib in armeabi-v7a');
-        #end
-        } else {
-        haveLua2 = false;
-        #if debug
-        FlxG.log.add('The APK dont have the lua lib in armeabi-v7a, this mod have modcharts?');
-        #end
-        }
-    
-        if (FileSystem.exists(path + 'lib/armeabi-v7a/libvlc.so')) {
-        haveVlc2 = true;
-        #if debug 
-        FlxG.log.add('The APK have the VLC lib in armeabi-v7a')
-        #end
-        } else {
-        haveVlc2 = false;
-        #if debug
-        FlxG.log.add('The APK dont have the vlc lib in armeabi-v7a');
-        #end
-        }
     }
+}
    
     public static function checkSpecs() { //checking the phone specs
         var ram:UInt64 = CppAPI.obtainRAM(); //stoled of wednesday inf.
@@ -264,5 +212,4 @@ class SystemUtil {
             return true;
             #end
         }
-
 
